@@ -31,7 +31,7 @@
                     </draggable>
                 </div>
                 <div class="flex justify-center">
-                    <button class="bg-blue rounded shadow text-white px-8 py-2" @click="submitTasks()">submit</button>
+                    <button class="bg-blue rounded shadow text-white px-8 py-2" @click="submitTasks()">Submit</button>
                 </div>
             </div>
             <!-- Arrange Tasks --> 
@@ -39,8 +39,8 @@
                 <h4 class="text-center">
                     Preview
                 </h4>
-                <table width='100%'>
-                    <tr class="bg-table-blue text-white text-small">
+                <table width="100%">
+                    <tr class="bg-table-blue text-white">
                         <th class="text-center w-1/2">Absolute Day</th>
                         <th class="text-center w-1/2">Name</th> 
                     </tr>

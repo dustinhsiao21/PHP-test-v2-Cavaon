@@ -5569,7 +5569,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("submit")]
+              [_vm._v("Submit")]
             )
           ])
         ]),
@@ -5627,7 +5627,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "bg-table-blue text-white text-small" }, [
+    return _c("tr", { staticClass: "bg-table-blue text-white" }, [
       _c("th", { staticClass: "text-center w-1/2" }, [_vm._v("Absolute Day")]),
       _vm._v(" "),
       _c("th", { staticClass: "text-center w-1/2" }, [_vm._v("Name")])
