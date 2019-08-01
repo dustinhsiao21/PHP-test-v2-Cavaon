@@ -41,7 +41,7 @@ class ProjectTaskService
     {
         $return = [];
         $remainDays = 0;
-        foreach ($tasks as $task) { 
+        foreach ($tasks as $task) {
             // if remainDays > 0, move to next index, and minus remainDays
             if ($remainDays) {
                 $remainDays--;
@@ -54,7 +54,7 @@ class ProjectTaskService
                     'day' => $task->absolute_day,
                     'type' => ProjectTask::TASK_TYPE,
                     'name' => $task->name,
-                    'story' => ''
+                    'story' => '',
                 ];
             } else {
                 // if $task->story !== null, group to days adn set remainDays
@@ -66,7 +66,7 @@ class ProjectTaskService
                     'day' => "$task->absolute_day - $endDay",
                     'type' => ProjectTask::STORY_TYPE,
                     'name' => $task->story->name,
-                    'story' => $task->story
+                    'story' => $task->story,
                 ];
             }
         }
