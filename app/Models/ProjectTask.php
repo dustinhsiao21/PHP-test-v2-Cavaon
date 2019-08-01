@@ -13,6 +13,8 @@ class ProjectTask extends Model
         'absolute_day',
         'name',
     ];
+    
+    public $timestamps = false;
 
     public function story()
     {

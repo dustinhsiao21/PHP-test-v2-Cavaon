@@ -5,16 +5,22 @@
 ![demo](./public/images/demo.png)
 
 ### install
+
+##### version
 PHP: 7.2
 Laravel: 5.8
 
+##### script
+
 ```
+cp .env.example .env //remember to setup database config
 composer install
 php artisan key:generate
 php artisan migrate
 php artisan db:seed
 npm install
 npm run dev
+php artisan serve
 ```
 
 ### test

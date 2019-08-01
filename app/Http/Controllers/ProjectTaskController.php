@@ -43,7 +43,6 @@ class ProjectTaskController extends Controller
      */
     public function apiUpdateTasks(Request $request)
     {
-        $request = $request->get('tasks');
-        $this->service->updateTasks($request);
+        $this->service->updateTasks($request->tasks);
     }
 }
