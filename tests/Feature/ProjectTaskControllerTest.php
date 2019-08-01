@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\ProjectTask;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTaskControllerTest extends TestCase
 {
@@ -20,11 +20,11 @@ class ProjectTaskControllerTest extends TestCase
     public function testApiGetTasks()
     {
         $this->seed('DatabaseSeeder');
-        
+
         $response = $this->get(route('getTasks', ['id' => 1]))->decodeResponseJson();
-        
+
         $this->assertEquals(3, count($response));
-        
+
         $this->assertEquals('1', $response[0]['day']);
         $this->assertEquals('Task FF', $response[0]['name']);
         $this->assertEquals('Simple Task', $response[0]['type']);
@@ -59,7 +59,7 @@ class ProjectTaskControllerTest extends TestCase
 
         $this->assertEquals('3', $tasks[1]['absolute_day']);
         $this->assertEquals('Task A', $tasks[1]['name']);
-        
+
         $this->assertEquals('4', $tasks[2]['absolute_day']);
         $this->assertEquals('Task B', $tasks[2]['name']);
     }

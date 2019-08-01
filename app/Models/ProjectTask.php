@@ -11,7 +11,7 @@ class ProjectTask extends Model
 
     protected $fillable = [
         'absolute_day',
-        'name'
+        'name',
     ];
 
     public function story()
