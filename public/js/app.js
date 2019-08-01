@@ -1746,14 +1746,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tasks: ''
+      tasks: '',
+      id: 1
     };
   },
   methods: {
     getTasks: function getTasks() {
       var _this = this;
 
-      axios.get('/api/tasks').then(function (tasks) {
+      axios.get('/api/tasks', {
+        params: {
+          id: this.id
+        }
+      }).then(function (tasks) {
         return _this.tasks = tasks.data;
       });
     },
@@ -1761,7 +1766,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.post('/api/update', {
-        "tasks": this.tasks
+        tasks: this.tasks
       }).then(function () {
         return _this2.getTasks();
       });

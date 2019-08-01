@@ -21,7 +21,7 @@ class ProjectTaskControllerTest extends TestCase
     {
         $this->seed('DatabaseSeeder');
         
-        $response = $this->get('/api/tasks')->decodeResponseJson();
+        $response = $this->get(route('getTasks', ['id' => 1]))->decodeResponseJson();
         
         $this->assertEquals(3, count($response));
         

@@ -47,15 +47,16 @@ export default {
     data(){
         return {
             tasks: '',
+            id: 1,
         }
     },
     methods: {
         getTasks(){
-            axios.get('/api/tasks')
-                .then(tasks => this.tasks = tasks.data);
+            axios.get('/api/tasks', {params:{id: this.id}})
+                .then(tasks => this.tasks = tasks.data)
         },
         submitTasks(){
-            axios.post('/api/update', {"tasks":this.tasks})
+            axios.post('/api/update', {tasks: this.tasks})
                 .then(() => this.getTasks());
         }
     }
