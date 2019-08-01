@@ -22,7 +22,7 @@ class ProjectTaskRepository
      * find data.
      *
      * @param int|array $id
-     * @return Model
+     * @return ProjectTask
      */
     public function find($id)
     {

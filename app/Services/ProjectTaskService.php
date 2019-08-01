@@ -42,6 +42,7 @@ class ProjectTaskService
         $return = [];
         $remainDays = 0;
         foreach ($tasks as $task) {
+            // if remainDays > 0, move to next index, and minus remainDays
             if ($remainDays) {
                 $remainDays--;
                 continue;
@@ -54,6 +55,7 @@ class ProjectTaskService
                     'name' => $task->name,
                 ];
             } else {
+                // if $task->story !== null, group to days adn set remainDays
                 $remainDays = $task->story->take_days - 1;
                 $endDay = $task->absolute_day + $task->story->take_days - 1;
                 $return[] = [
@@ -86,6 +88,7 @@ class ProjectTaskService
                 $this->repo->save($originalTask, ['absolute_day' => $absolute_day, 'name' => $task['name']]);
                 $absolute_day++;
             }
+            // if there is story type, find the tasks and the story, then use the take_days to find grouped tasks.,
             if ($task['type'] == ProjectTask::STORY_TYPE) {
                 $originalTask = $this->repo->find($task['id']);
                 $take_days = $originalTask->story->take_days;
