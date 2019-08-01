@@ -1,14 +1,14 @@
 <template>
     <div class="h-screen w-auto flex justify-center items-center">
-        <div class="container">
+        <div class="container max-w-md">
             <h4 class="text-center">
             Arrange Tasks
             </h4>
-            <div class="container flex justify-around">
-                <div></div>
-                <div>Day</div>
-                <div>Type</div>
-                <div>Task/Story Name</div>
+            <div class="container flex">
+                <div class="w-1/5"></div>
+                <div class="w-1/5 ml-5">Day</div>
+                <div class="w-1/5">Type</div>
+                <div class="w-1/3 text-center ml-5">Task/Story Name</div>
             </div>
             <div v-if="tasks !== ''">
                 <draggable 
@@ -24,7 +24,7 @@
                             </div>
                             <div class="w-1/4" v-text="task.type">
                             </div>
-                            <div class="w-1/4">
+                            <div class="w-1/4 text-center">
                                 <input type="text" v-model="task.name" :disabled="task.type == 'Story'" :class="task.type == 'Story' ? 'bg-grey-light':''">
                             </div>
                         </div>
@@ -40,28 +40,27 @@
 
 <script>
 import draggable from "vuedraggable";
-    export default {
-        components: { draggable },
-        created() {
-            this.getTasks();
+export default {
+    components: { 
+        draggable 
+    },
+    created() {
+        this.getTasks();
+    },
+    data(){
+        return {
+            tasks: '',
+        }
+    },
+    methods: {
+        getTasks(){
+            axios.get('/api/tasks')
+                .then(tasks => this.tasks = tasks.data);
         },
-        data(){
-            return {
-                tasks: '',
-            }
-        },
-        methods: {
-            getTasks(){
-                axios.get('/api/tasks')
-                    .then(tasks => this.tasks = tasks.data);
-            },
-            submitTasks(){
-                console.log(this.tasks);
-                axios.post('/api/update', {"tasks":this.tasks})
-                    .then(() => {
-                        this.getTasks();
-                    });
-            }
+        submitTasks(){
+            axios.post('/api/update', {"tasks":this.tasks})
+                .then(() => this.getTasks());
         }
     }
+}
 </script>

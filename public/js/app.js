@@ -1763,11 +1763,10 @@ __webpack_require__.r(__webpack_exports__);
     submitTasks: function submitTasks() {
       var _this2 = this;
 
-      console.log(this.tasks);
       axios.post('/api/update', {
         "tasks": this.tasks
       }).then(function () {
-        _this2.getTasks();
+        return _this2.getTasks();
       });
     }
   }
@@ -39542,7 +39541,7 @@ var render = function() {
     "div",
     { staticClass: "h-screen w-auto flex justify-center items-center" },
     [
-      _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "container max-w-md" }, [
         _c("h4", { staticClass: "text-center" }, [
           _vm._v("\n        Arrange Tasks\n        ")
         ]),
@@ -39588,7 +39587,7 @@ var render = function() {
                             domProps: { textContent: _vm._s(task.type) }
                           }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "w-1/4" }, [
+                          _c("div", { staticClass: "w-1/4 text-center" }, [
                             _c("input", {
                               directives: [
                                 {
@@ -39649,14 +39648,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container flex justify-around" }, [
-      _c("div"),
+    return _c("div", { staticClass: "container flex" }, [
+      _c("div", { staticClass: "w-1/5" }),
       _vm._v(" "),
-      _c("div", [_vm._v("Day")]),
+      _c("div", { staticClass: "w-1/5 ml-5" }, [_vm._v("Day")]),
       _vm._v(" "),
-      _c("div", [_vm._v("Type")]),
+      _c("div", { staticClass: "w-1/5" }, [_vm._v("Type")]),
       _vm._v(" "),
-      _c("div", [_vm._v("Task/Story Name")])
+      _c("div", { staticClass: "w-1/3 text-center ml-5" }, [
+        _vm._v("Task/Story Name")
+      ])
     ])
   }
 ]
