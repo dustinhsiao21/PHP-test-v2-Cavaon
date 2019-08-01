@@ -27,7 +27,7 @@ class ProjectTaskControllerTest extends TestCase
 
         $this->assertEquals('1', $response[0]['day']);
         $this->assertEquals('Task FF', $response[0]['name']);
-        $this->assertEquals('Simple Task', $response[0]['type']);
+        $this->assertEquals('Daily Task', $response[0]['type']);
 
         $this->assertEquals('2 - 3', $response[1]['day']);
         $this->assertEquals('Store A', $response[1]['name']);
@@ -35,7 +35,7 @@ class ProjectTaskControllerTest extends TestCase
 
         $this->assertEquals('4', $response[2]['day']);
         $this->assertEquals('Task GG', $response[2]['name']);
-        $this->assertEquals('Simple Task', $response[2]['type']);
+        $this->assertEquals('Daily Task', $response[2]['type']);
     }
 
     public function testUpudate()
