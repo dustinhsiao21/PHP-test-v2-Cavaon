@@ -43,9 +43,10 @@ class ProjectTaskControllerTest extends TestCase
         $this->seed('DatabaseSeeder');
 
         $inputs = [
-            ['id' => 1, 'day' => '1', 'name' => 'Task FF', 'type' => 'Simple Task'],
-            ['id' => 4, 'day' => '4', 'name' => 'Task CC', 'type' => 'Simple Task'],
-            ['id' => 2, 'day' => '2 - 3', 'name' => 'Store A', 'type' => 'Story'],
+            ['id' => 1, 'absolute_day' => '1', 'name' => 'Task FF', 'type' => 'Simple Task'],
+            ['id' => 4, 'absolute_day' => '2', 'name' => 'Task CC', 'type' => 'Simple Task'],
+            ['id' => 2, 'absolute_day' => '3', 'name' => 'Task A', 'type' => 'Story'],
+            ['id' => 3, 'absolute_day' => '4', 'name' => 'Task B', 'type' => 'Story'],
         ];
 
         $this->post('/api/update', ['tasks' => $inputs])->assertStatus(200);

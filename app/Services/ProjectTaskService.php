@@ -41,7 +41,7 @@ class ProjectTaskService
     {
         $return = [];
         $remainDays = 0;
-        foreach ($tasks as $task) {
+        foreach ($tasks as $task) { 
             // if remainDays > 0, move to next index, and minus remainDays
             if ($remainDays) {
                 $remainDays--;
@@ -50,9 +50,11 @@ class ProjectTaskService
             if ($task->story_id === null) {
                 $return[] = [
                     'id' => $task->id,
+                    'absolute_day' => $task->absolute_day,
                     'day' => $task->absolute_day,
                     'type' => ProjectTask::TASK_TYPE,
                     'name' => $task->name,
+                    'story' => ''
                 ];
             } else {
                 // if $task->story !== null, group to days adn set remainDays
@@ -60,9 +62,11 @@ class ProjectTaskService
                 $endDay = $task->absolute_day + $task->story->take_days - 1;
                 $return[] = [
                     'id' => $task->id,
+                    'absolute_day' => $task->absolute_day,
                     'day' => "$task->absolute_day - $endDay",
                     'type' => ProjectTask::STORY_TYPE,
                     'name' => $task->story->name,
+                    'story' => $task->story
                 ];
             }
         }
@@ -78,31 +82,9 @@ class ProjectTaskService
      */
     public function updateTasks(array $data)
     {
-        $absolute_day = 0;
-        foreach ($data as $index => $task) {
-            if (! $absolute_day) {
-                $absolute_day = $index + 1;
-            }
-            if ($task['type'] == ProjectTask::TASK_TYPE) {
-                $originalTask = $this->repo->find($task['id']);
-                $this->repo->save($originalTask, ['absolute_day' => $absolute_day, 'name' => $task['name']]);
-                $absolute_day++;
-            }
-            // if there is story type, find the tasks and the story, then use the take_days to find grouped tasks.,
-            if ($task['type'] == ProjectTask::STORY_TYPE) {
-                $originalTask = $this->repo->find($task['id']);
-                $take_days = $originalTask->story->take_days;
-                $total = $originalTask->id + $take_days;
-                for ($task['id']; $task['id'] < $total; $task['id']++) {
-                    $ids[] = $task['id'];
-                }
-                $originalTasks = $this->repo->find($ids);
-
-                foreach ($originalTasks as $task) {
-                    $this->repo->save($task, ['absolute_day' => $absolute_day]);
-                    $absolute_day++;
-                }
-            }
+        foreach ($data as $task) {
+            $originalTask = $this->repo->find($task['id']);
+            $this->repo->save($originalTask, ['absolute_day' => $task['absolute_day'], 'name' => $task['name']]);
         }
     }
 }
