@@ -15,15 +15,27 @@ class ProjectTaskService {
         $this->repo = $repo;
     }
 
-    public function getProjectOneTasks()
+    /**
+     * get project's task
+     *
+     * @param integer $id
+     * @return array
+     */
+    public function getProjectTasks(int $id)
     {
-        $tasks = $this->repo->getProjectTasks(1)
+        $tasks = $this->repo->getProjectTasks($id)
                             ->with('story')
                             ->get()
                             ->sortBy('absolute_day');
         return  $this->formatTasks($tasks);
     }
-
+    
+    /**
+     * format tasks collection fo array task
+     *
+     * @param Collection $tasks
+     * @return array
+     */
     protected function formatTasks(Collection $tasks)
     {
         $return = [];
@@ -55,6 +67,12 @@ class ProjectTaskService {
         return $return;
     }
 
+    /**
+     * update Tasks
+     *
+     * @param array $data
+     * @return void
+     */
     public function updateTasks(array $data)
     {
         $absolute_day = 0;

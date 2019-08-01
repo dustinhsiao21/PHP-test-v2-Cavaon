@@ -14,16 +14,33 @@ class ProjectTaskController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * get page view
+     *
+     * @return view
+     */
     public function index()
     {
-        return view('project/index');
+        return view('Project/index');
     }
 
-    public function apiGetTasks()
+    /**
+     * get project's tasks
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function apiGetTasks(Request $request)
     {
-        return $this->service->getProjectOneTasks();
+        return $this->service->getProjectTasks($request->id);
     }
 
+    /**
+     * update project's tasks
+     *
+     * @param Request $request
+     * @return array
+     */
     public function apiUpdateTasks(Request $request)
     {
         $request = $request->get('tasks');

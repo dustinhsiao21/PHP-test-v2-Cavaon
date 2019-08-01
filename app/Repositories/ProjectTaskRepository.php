@@ -18,11 +18,24 @@ class ProjectTaskRepository {
         return $this->model->where('project_id', $id);
     }
 
+    /**
+     * find data
+     *
+     * @param int|array $id
+     * @return Model
+     */
     public function find($id)
     {
         return $this->model->find($id);
     }
 
+    /**
+     * save data
+     *
+     * @param ProjectTask $task
+     * @param array $array
+     * @return void
+     */
     public function save(ProjectTask $task, array $array)
     {
         $task->fill($array);

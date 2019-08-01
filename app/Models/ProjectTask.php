@@ -13,6 +13,7 @@ class ProjectTask extends Model
         'absolute_day',
         'name'
     ];
+
     public function story()
     {
         return $this->belongsTo('App\Models\Story');
