@@ -19,7 +19,6 @@ class CreateProjectTasksTable extends Migration
             $table->integer('absolute_day');
             $table->string('name', 45);
             $table->unsignedBigInteger('story_id')->nullable();
-            $table->timestamps();
 
             $table->index(['project_id', 'absolute_day']);
             $table->foreign('project_id')->references('id')->on('projects');

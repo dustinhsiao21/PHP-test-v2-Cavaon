@@ -18,7 +18,6 @@ class CreateStoriesTable extends Migration
             $table->string('name', 45);
             $table->integer('take_days');
             $table->text('daily_tasks_lisk');
-            $table->timestamps();
         });
     }
 
