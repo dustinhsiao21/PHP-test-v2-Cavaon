@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectTask extends Model
 {
-    const TASK_TYPE = 'Simple Task';
+    const TASK_TYPE = 'Daily Task';
     const STORY_TYPE = 'Story';
 
     protected $fillable = [

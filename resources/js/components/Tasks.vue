@@ -83,18 +83,27 @@ export default {
                 .then(tasks => this.tasks = tasks.data)
         },
         submitTasks(){
-            axios.post('/api/update', {tasks: this.tasks})
+            axios.post('/api/update', {tasks: this.formatTasks})
                 .then(() => this.getTasks());
         },
         change(evt){
-            let newDays = this.tasks[evt.newIndex].story === '' ? 0 : this.tasks[evt.newIndex].story.take_days -1 ;
-            
-            this.tasks[evt.oldIndex].absolute_day = evt.newIndex + 1 + newDays;
-            this.tasks[evt.newIndex].absolute_day = evt.oldIndex + 1;
+            // exchange
+            let old_absolute_day = this.tasks[evt.oldIndex].absolute_day;
+            let new_absolute_day = this.tasks[evt.newIndex].absolute_day;
+            this.tasks[evt.oldIndex].absolute_day = new_absolute_day;
+            this.tasks[evt.newIndex].absolute_day = old_absolute_day;
+
+            // sort by absolute_day
             this.tasks.sort(function(a, b){
                 return parseFloat(a.absolute_day) - parseFloat(b.absolute_day);
             });
+            
+            // reset absolute_day
+            for(let i = 1; i < this.tasks.length; i++){
+                this.tasks[i].absolute_day = this.tasks[i - 1].absolute_day + (this.tasks[i - 1].story === '' ? 1 : this.tasks[i - 1].story.take_days)
+            }
 
+            // reset day
             this.tasks.map(function(task){
                 if(task.story === ''){
                     task.day = task.absolute_day;
@@ -116,6 +125,7 @@ export default {
                     let days = this.tasks[i].story.take_days;
                     for(let j = 0; j < days; j++){
                         format.push({
+                            'id': this.tasks[i].id + j,
                             'absolute_day': absolute_day + this.tasks[i].story.daily_tasks_lisk[j].relative_day - 1,
                             'name': this.tasks[i].story.daily_tasks_lisk[j].task_name
                         });
