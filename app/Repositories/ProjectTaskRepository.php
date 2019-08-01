@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use App\Models\ProjectTask;
 
-class ProjectTaskRepository {
-    
+class ProjectTaskRepository
+{
     private $model;
 
     public function __construct(ProjectTask $model)
@@ -19,7 +19,7 @@ class ProjectTaskRepository {
     }
 
     /**
-     * find data
+     * find data.
      *
      * @param int|array $id
      * @return Model
@@ -30,7 +30,7 @@ class ProjectTaskRepository {
     }
 
     /**
-     * save data
+     * save data.
      *
      * @param ProjectTask $task
      * @param array $array

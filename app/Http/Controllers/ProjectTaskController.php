@@ -15,7 +15,7 @@ class ProjectTaskController extends Controller
     }
 
     /**
-     * get page view
+     * get page view.
      *
      * @return view
      */
@@ -25,7 +25,7 @@ class ProjectTaskController extends Controller
     }
 
     /**
-     * get project's tasks
+     * get project's tasks.
      *
      * @param Request $request
      * @return array
@@ -36,7 +36,7 @@ class ProjectTaskController extends Controller
     }
 
     /**
-     * update project's tasks
+     * update project's tasks.
      *
      * @param Request $request
      * @return array

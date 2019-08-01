@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\ProjectTask;
+use Illuminate\Database\Seeder;
 
 class ProjectTasksTableSeeder extends Seeder
 {
@@ -12,9 +12,9 @@ class ProjectTasksTableSeeder extends Seeder
      */
     public function run()
     {
-        $json = File::get("database/data/project_tasks.json");
+        $json = File::get('database/data/project_tasks.json');
         $data = json_decode($json);
-        foreach($data as $task){
+        foreach ($data as $task) {
             $projectTasks[] = ['id' => $task->id, 'project_id' => $task->project_id, 'absolute_day' => $task->absolute_day, 'name' => $task->name, 'story_id' => $task->story_id];
         }
 

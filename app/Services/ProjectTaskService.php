@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Repositories\ProjectTaskRepository;
 use App\Models\ProjectTask;
+use App\Repositories\ProjectTaskRepository;
 use Illuminate\Database\Eloquent\Collection;
 
-class ProjectTaskService {
-
+class ProjectTaskService
+{
     private $repo;
 
     public function __construct(ProjectTaskRepository $repo)
@@ -16,9 +16,9 @@ class ProjectTaskService {
     }
 
     /**
-     * get project's task
+     * get project's task.
      *
-     * @param integer $id
+     * @param int $id
      * @return array
      */
     public function getProjectTasks(int $id)
@@ -27,11 +27,12 @@ class ProjectTaskService {
                             ->with('story')
                             ->get()
                             ->sortBy('absolute_day');
+
         return  $this->formatTasks($tasks);
     }
-    
+
     /**
-     * format tasks collection fo array task
+     * format tasks collection fo array task.
      *
      * @param Collection $tasks
      * @return array
@@ -40,17 +41,17 @@ class ProjectTaskService {
     {
         $return = [];
         $remainDays = 0;
-        foreach($tasks as $task){
-            if($remainDays){
+        foreach ($tasks as $task) {
+            if ($remainDays) {
                 $remainDays--;
                 continue;
             }
-            if($task->story_id === null){
+            if ($task->story_id === null) {
                 $return[] = [
                     'id' => $task->id,
                     'day' => $task->absolute_day,
                     'type' => ProjectTask::TASK_TYPE,
-                    'name' => $task->name
+                    'name' => $task->name,
                 ];
             } else {
                 $remainDays = $task->story->take_days - 1;
@@ -59,7 +60,7 @@ class ProjectTaskService {
                     'id' => $task->id,
                     'day' => "$task->absolute_day - $endDay",
                     'type' => ProjectTask::STORY_TYPE,
-                    'name' => $task->story->name
+                    'name' => $task->story->name,
                 ];
             }
         }
@@ -68,7 +69,7 @@ class ProjectTaskService {
     }
 
     /**
-     * update Tasks
+     * update Tasks.
      *
      * @param array $data
      * @return void
@@ -76,25 +77,25 @@ class ProjectTaskService {
     public function updateTasks(array $data)
     {
         $absolute_day = 0;
-        foreach($data as $index => $task){
-            if(!$absolute_day){
+        foreach ($data as $index => $task) {
+            if (! $absolute_day) {
                 $absolute_day = $index + 1;
             }
-            if($task['type'] == ProjectTask::TASK_TYPE){
+            if ($task['type'] == ProjectTask::TASK_TYPE) {
                 $originalTask = $this->repo->find($task['id']);
                 $this->repo->save($originalTask, ['absolute_day' => $absolute_day, 'name' => $task['name']]);
                 $absolute_day++;
             }
-            if($task['type'] == ProjectTask::STORY_TYPE){
+            if ($task['type'] == ProjectTask::STORY_TYPE) {
                 $originalTask = $this->repo->find($task['id']);
                 $take_days = $originalTask->story->take_days;
                 $total = $originalTask->id + $take_days;
-                for($task['id']; $task['id'] < $total; $task['id']++){
+                for ($task['id']; $task['id'] < $total; $task['id']++) {
                     $ids[] = $task['id'];
                 }
                 $originalTasks = $this->repo->find($ids);
-                
-                foreach($originalTasks as $task){
+
+                foreach ($originalTasks as $task) {
                     $this->repo->save($task, ['absolute_day' => $absolute_day]);
                     $absolute_day++;
                 }

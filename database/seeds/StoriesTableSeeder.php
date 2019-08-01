@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Story;
+use Illuminate\Database\Seeder;
 
 class StoriesTableSeeder extends Seeder
 {
@@ -12,15 +12,15 @@ class StoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $json = File::get("database/data/stories.json");
+        $json = File::get('database/data/stories.json');
         $data = json_decode($json);
-        foreach($data as $story){
+        foreach ($data as $story) {
             $stories[] = [
                 'id' => $story->id,
                 'name' => $story->name,
                 'take_days' => $story->take_days,
                 'daily_tasks_lisk' => json_encode($story->daily_tasks_lisk),
-            ];    
+            ];
         }
 
         Story::insert($stories);
