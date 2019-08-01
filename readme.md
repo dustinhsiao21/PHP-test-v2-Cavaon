@@ -1,5 +1,7 @@
 ## PHP-test-v2-Cavaon
 
+![demo](./public/images/demo.png)
+
 ### install
 
 ```
