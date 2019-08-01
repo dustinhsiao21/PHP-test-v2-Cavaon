@@ -1,4 +1,6 @@
 ## PHP-test-v2-Cavaon
+[![Build Status](https://travis-ci.org/dustinhsiao21/PHP-test-v2-Cavaon.svg?branch=master)](https://travis-ci.org/dustinhsiao21/PHP-test-v2-Cavaon)
+[![StyleCI](https://github.styleci.io/repos/200037175/shield?branch=master)]
 
 ![demo](./public/images/demo.png)
 
