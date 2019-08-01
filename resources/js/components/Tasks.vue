@@ -83,7 +83,6 @@ export default {
                 .then(tasks => this.tasks = tasks.data)
         },
         submitTasks(){
-            console.log(this.tasks[0]);
             axios.post('/api/update', {tasks: this.tasks})
                 .then(() => this.getTasks());
         },

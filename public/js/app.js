@@ -1792,7 +1792,6 @@ __webpack_require__.r(__webpack_exports__);
     submitTasks: function submitTasks() {
       var _this2 = this;
 
-      console.log(this.tasks[0]);
       axios.post('/api/update', {
         tasks: this.tasks
       }).then(function () {
