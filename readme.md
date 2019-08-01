@@ -5,6 +5,8 @@
 ![demo](./public/images/demo.png)
 
 ### install
+PHP: 7.2
+Laravel: 5.8
 
 ```
 composer install
