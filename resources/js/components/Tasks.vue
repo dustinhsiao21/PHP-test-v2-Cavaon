@@ -19,13 +19,10 @@
                     <div v-for="task in tasks" :key="task.id" class="bg-grey-light my-4 px-4 py-8">
                         <div class="flex justify-around">
                             <i class="fas fa-bars text-4xl handle"></i>
+                            <div class="w-1/4 text-center" v-text="task.day"></div>
+                            <div class="w-1/4" v-text="task.type"></div>
                             <div class="w-1/4 text-center">
-                                {{ task.day }}
-                            </div>
-                            <div class="w-1/4" v-text="task.type">
-                            </div>
-                            <div class="w-1/4 text-center">
-                                <input type="text" v-model="task.name" :disabled="task.type == 'Story'" :class="task.type == 'Story' ? 'bg-grey-light':''">
+                                <input type="text" v-model="task.name" :disabled="task.type === 'Story'" :class="task.type === 'Story' ? 'bg-grey-light':''">
                             </div>
                         </div>
                     </div>
